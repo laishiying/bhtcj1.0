@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bhtcj.jason.mapper.WpModuleMapper">
+
+    <sql id="wpModuleBaseColumnSql">
+        moduleId,
+        moduleName,
+        parentModuleID,
+        moduleUrl,
+        moduleDescription,
+        creationTime,
+        creationPeopleId,
+        modifyTime,
+        modifyPeoleId
+    </sql>
+
+    <sql id="wpModuleBaseWhereSql">
+        <if test="map!=null">
+            <where>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.moduleId)">
+                    moduleId = #{map.moduleId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.moduleName)">
+                    AND moduleName = #{map.moduleName}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.parentModuleId)">
+                    AND parentModuleID = #{map.parentModuleId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.moduleUrl)">
+                    AND moduleUrl = #{map.moduleUrl}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.moduleDescription)">
+                    AND moduleDescription = #{map.moduleDescription}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.creationTime)">
+                    AND creationTime = #{map.creationTime}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.creationPeopleId)">
+                    AND creationPeopleId = #{map.creationPeopleId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.modifyTime)">
+                    AND modifyTime = #{map.modifyTime}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.modifyPeoleId)">
+                    AND modifyPeoleId = #{map.modifyPeoleId}
+                </if>
+            </where>
+        </if>
+    </sql>
+
+    <insert id="insertWpModule" parameterType="com.bhtcj.jason.entity.WpModule">
+        INSERT INTO wp_module(
+        <include refid="wpModuleBaseColumnSql"/>
+        )VALUES(
+            #{moduleId},
+            #{moduleName},
+            #{parentModuleId},
+            #{moduleUrl},
+            #{moduleDescription},
+            #{creationTime},
+            #{creationPeopleId},
+            #{modifyTime},
+            #{modifyPeoleId}
+        )
+    </insert>
+
+    
+    <delete id="deleteWpModuleByModuleId" parameterType="Integer">
+        DELETE FROM wp_module WHERE moduleId = #{moduleId}
+    </delete>
+
+    <update id="updateWpModule" parameterType="com.bhtcj.jason.entity.WpModule">
+        UPDATE wp_module
+        <set>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(moduleName)">
+                moduleName = #{moduleName} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(parentModuleId)">
+                parentModuleID = #{parentModuleId} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(moduleUrl)">
+                moduleUrl = #{moduleUrl} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(moduleDescription)">
+                moduleDescription = #{moduleDescription} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(creationTime)">
+                creationTime = #{creationTime} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(creationPeopleId)">
+                creationPeopleId = #{creationPeopleId} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(modifyTime)">
+                modifyTime = #{modifyTime} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(modifyPeoleId)">
+                modifyPeoleId = #{modifyPeoleId} ,
+            </if>
+        </set>
+        WHERE moduleId = #{moduleId}
+    </update>
+
+    <select id="searchWpModuleByParams" parameterType="map" resultMap="wpModuleMap">
+        SELECT
+        <include refid="wpModuleBaseColumnSql"/>
+        FROM wp_module
+        <include refid="wpModuleBaseWhereSql"/>
+    </select>
+
+    <resultMap type="com.bhtcj.jason.entity.WpModule" id="wpModuleMap">
+        <id column="moduleId" property="moduleId"/>
+        <result column="moduleName" property="moduleName"/>
+        <result column="parentModuleID" property="parentModuleId"/>
+        <result column="moduleUrl" property="moduleUrl"/>
+        <result column="moduleDescription" property="moduleDescription"/>
+        <result column="creationTime" property="creationTime"/>
+        <result column="creationPeopleId" property="creationPeopleId"/>
+        <result column="modifyTime" property="modifyTime"/>
+        <result column="modifyPeoleId" property="modifyPeoleId"/>
+    </resultMap>
+
+</mapper>

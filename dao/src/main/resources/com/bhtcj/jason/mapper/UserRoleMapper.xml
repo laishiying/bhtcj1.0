@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bhtcj.jason.mapper.UserRoleMapper">
+
+    <sql id="userRoleBaseColumnSql">
+        id,
+        userId,
+        roleId,
+        creationTime,
+        creationPeopleId,
+        modifyTime,
+        modifyPeoleId
+    </sql>
+
+    <sql id="userRoleBaseWhereSql">
+        <if test="map!=null">
+            <where>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.id)">
+                    id = #{map.id}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.userId)">
+                    AND userId = #{map.userId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.roleId)">
+                    AND roleId = #{map.roleId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.creationTime)">
+                    AND creationTime = #{map.creationTime}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.creationPeopleId)">
+                    AND creationPeopleId = #{map.creationPeopleId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.modifyTime)">
+                    AND modifyTime = #{map.modifyTime}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.modifyPeoleId)">
+                    AND modifyPeoleId = #{map.modifyPeoleId}
+                </if>
+            </where>
+        </if>
+    </sql>
+
+    <insert id="insertUserRole" parameterType="com.bhtcj.jason.entity.UserRole">
+        INSERT INTO user_role(
+        <include refid="userRoleBaseColumnSql"/>
+        )VALUES(
+            #{id},
+            #{userId},
+            #{roleId},
+            #{creationTime},
+            #{creationPeopleId},
+            #{modifyTime},
+            #{modifyPeoleId}
+        )
+    </insert>
+
+    
+    <delete id="deleteUserRoleById" parameterType="Integer">
+        DELETE FROM user_role WHERE id = #{id}
+    </delete>
+
+    <update id="updateUserRole" parameterType="com.bhtcj.jason.entity.UserRole">
+        UPDATE user_role
+        <set>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(userId)">
+                userId = #{userId} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(roleId)">
+                roleId = #{roleId} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(creationTime)">
+                creationTime = #{creationTime} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(creationPeopleId)">
+                creationPeopleId = #{creationPeopleId} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(modifyTime)">
+                modifyTime = #{modifyTime} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(modifyPeoleId)">
+                modifyPeoleId = #{modifyPeoleId} ,
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="searchUserRoleByParams" parameterType="map" resultMap="userRoleMap">
+        SELECT
+        <include refid="userRoleBaseColumnSql"/>
+        FROM user_role
+        <include refid="userRoleBaseWhereSql"/>
+    </select>
+
+    <resultMap type="com.bhtcj.jason.entity.UserRole" id="userRoleMap">
+        <id column="id" property="id"/>
+        <result column="userId" property="userId"/>
+        <result column="roleId" property="roleId"/>
+        <result column="creationTime" property="creationTime"/>
+        <result column="creationPeopleId" property="creationPeopleId"/>
+        <result column="modifyTime" property="modifyTime"/>
+        <result column="modifyPeoleId" property="modifyPeoleId"/>
+    </resultMap>
+
+</mapper>

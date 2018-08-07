@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bhtcj.jason.mapper.WpRoleMapper">
+
+    <sql id="wpRoleBaseColumnSql">
+        roleId,
+        roleName,
+        parentRoleID,
+        roleDescription,
+        creationTime,
+        creationPeopleId,
+        modifyTime,
+        modifyPeoleId
+    </sql>
+
+    <sql id="wpRoleBaseWhereSql">
+        <if test="map!=null">
+            <where>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.roleId)">
+                    roleId = #{map.roleId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.roleName)">
+                    AND roleName = #{map.roleName}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.parentRoleId)">
+                    AND parentRoleID = #{map.parentRoleId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.roleDescription)">
+                    AND roleDescription = #{map.roleDescription}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.creationTime)">
+                    AND creationTime = #{map.creationTime}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.creationPeopleId)">
+                    AND creationPeopleId = #{map.creationPeopleId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.modifyTime)">
+                    AND modifyTime = #{map.modifyTime}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.modifyPeoleId)">
+                    AND modifyPeoleId = #{map.modifyPeoleId}
+                </if>
+            </where>
+        </if>
+    </sql>
+
+    <insert id="insertWpRole" parameterType="com.bhtcj.jason.entity.WpRole">
+        INSERT INTO wp_role(
+        <include refid="wpRoleBaseColumnSql"/>
+        )VALUES(
+            #{roleId},
+            #{roleName},
+            #{parentRoleId},
+            #{roleDescription},
+            #{creationTime},
+            #{creationPeopleId},
+            #{modifyTime},
+            #{modifyPeoleId}
+        )
+    </insert>
+
+    
+    <delete id="deleteWpRoleByRoleId" parameterType="Integer">
+        DELETE FROM wp_role WHERE roleId = #{roleId}
+    </delete>
+
+    <update id="updateWpRole" parameterType="com.bhtcj.jason.entity.WpRole">
+        UPDATE wp_role
+        <set>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(roleName)">
+                roleName = #{roleName} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(parentRoleId)">
+                parentRoleID = #{parentRoleId} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(roleDescription)">
+                roleDescription = #{roleDescription} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(creationTime)">
+                creationTime = #{creationTime} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(creationPeopleId)">
+                creationPeopleId = #{creationPeopleId} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(modifyTime)">
+                modifyTime = #{modifyTime} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(modifyPeoleId)">
+                modifyPeoleId = #{modifyPeoleId} ,
+            </if>
+        </set>
+        WHERE roleId = #{roleId}
+    </update>
+
+    <select id="searchWpRoleByParams" parameterType="map" resultMap="wpRoleMap">
+        SELECT
+        <include refid="wpRoleBaseColumnSql"/>
+        FROM wp_role
+        <include refid="wpRoleBaseWhereSql"/>
+    </select>
+
+    <resultMap type="com.bhtcj.jason.entity.WpRole" id="wpRoleMap">
+        <id column="roleId" property="roleId"/>
+        <result column="roleName" property="roleName"/>
+        <result column="parentRoleID" property="parentRoleId"/>
+        <result column="roleDescription" property="roleDescription"/>
+        <result column="creationTime" property="creationTime"/>
+        <result column="creationPeopleId" property="creationPeopleId"/>
+        <result column="modifyTime" property="modifyTime"/>
+        <result column="modifyPeoleId" property="modifyPeoleId"/>
+    </resultMap>
+
+</mapper>

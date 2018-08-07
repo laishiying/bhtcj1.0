@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bhtcj.jason.mapper.WpUserMapper">
+
+    <sql id="wpUserBaseColumnSql">
+        userId,
+        userName,
+        phone,
+        userPassword,
+        workNumber,
+        landline,
+        ipconfig,
+        state,
+        inductionTime,
+        address,
+        sex,
+        IDNumber,
+        education,
+        organizationId,
+        lastLogin,
+        loginCount,
+        creationTime,
+        creationPeopleId,
+        modifyTime,
+        modifyPeoleId
+    </sql>
+
+    <sql id="wpUserBaseWhereSql">
+        <if test="map!=null">
+            <where>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.userId)">
+                    userId = #{map.userId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.userName)">
+                    AND userName = #{map.userName}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.phone)">
+                    AND phone = #{map.phone}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.userPassword)">
+                    AND userPassword = #{map.userPassword}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.workNumber)">
+                    AND workNumber = #{map.workNumber}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.landline)">
+                    AND landline = #{map.landline}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.ipconfig)">
+                    AND ipconfig = #{map.ipconfig}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.state)">
+                    AND state = #{map.state}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.inductionTime)">
+                    AND inductionTime = #{map.inductionTime}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.address)">
+                    AND address = #{map.address}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.sex)">
+                    AND sex = #{map.sex}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.idnumber)">
+                    AND IDNumber = #{map.idnumber}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.education)">
+                    AND education = #{map.education}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.organizationId)">
+                    AND organizationId = #{map.organizationId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.lastLogin)">
+                    AND lastLogin = #{map.lastLogin}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.loginCount)">
+                    AND loginCount = #{map.loginCount}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.creationTime)">
+                    AND creationTime = #{map.creationTime}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.creationPeopleId)">
+                    AND creationPeopleId = #{map.creationPeopleId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.modifyTime)">
+                    AND modifyTime = #{map.modifyTime}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.modifyPeoleId)">
+                    AND modifyPeoleId = #{map.modifyPeoleId}
+                </if>
+            </where>
+        </if>
+    </sql>
+
+    <insert id="insertWpUser" parameterType="com.bhtcj.jason.entity.WpUser">
+        INSERT INTO wp_user(
+        <include refid="wpUserBaseColumnSql"/>
+        )VALUES(
+            #{userId},
+            #{userName},
+            #{phone},
+            #{userPassword},
+            #{workNumber},
+            #{landline},
+            #{ipconfig},
+            #{state},
+            #{inductionTime},
+            #{address},
+            #{sex},
+            #{idnumber},
+            #{education},
+            #{organizationId},
+            #{lastLogin},
+            #{loginCount},
+            #{creationTime},
+            #{creationPeopleId},
+            #{modifyTime},
+            #{modifyPeoleId}
+        )
+    </insert>
+
+    
+    <delete id="deleteWpUserByUserId" parameterType="Integer">
+        DELETE FROM wp_user WHERE userId = #{userId}
+    </delete>
+
+    <update id="updateWpUser" parameterType="com.bhtcj.jason.entity.WpUser">
+        UPDATE wp_user
+        <set>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(userName)">
+                userName = #{userName} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(phone)">
+                phone = #{phone} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(userPassword)">
+                userPassword = #{userPassword} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(workNumber)">
+                workNumber = #{workNumber} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(landline)">
+                landline = #{landline} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(ipconfig)">
+                ipconfig = #{ipconfig} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(state)">
+                state = #{state} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(inductionTime)">
+                inductionTime = #{inductionTime} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(address)">
+                address = #{address} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(sex)">
+                sex = #{sex} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(idnumber)">
+                IDNumber = #{idnumber} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(education)">
+                education = #{education} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(organizationId)">
+                organizationId = #{organizationId} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(lastLogin)">
+                lastLogin = #{lastLogin} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(loginCount)">
+                loginCount = #{loginCount} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(creationTime)">
+                creationTime = #{creationTime} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(creationPeopleId)">
+                creationPeopleId = #{creationPeopleId} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(modifyTime)">
+                modifyTime = #{modifyTime} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(modifyPeoleId)">
+                modifyPeoleId = #{modifyPeoleId} ,
+            </if>
+        </set>
+        WHERE userId = #{userId}
+    </update>
+
+    <select id="searchWpUserByParams" parameterType="map" resultMap="wpUserMap">
+        SELECT
+        <include refid="wpUserBaseColumnSql"/>
+        FROM wp_user
+        <include refid="wpUserBaseWhereSql"/>
+    </select>
+
+    <select id="loginUser" parameterType="map" resultMap="wpUserMap">
+        SELECT * FROM wp_user WHERE state = 1
+        AND workNumber = #{map.workNumber}
+        AND userPassword =  #{map.userPassword}
+    </select>
+
+
+    <resultMap type="com.bhtcj.jason.entity.WpUser" id="wpUserMap">
+        <id column="userId" property="userId"/>
+        <result column="userName" property="userName"/>
+        <result column="phone" property="phone"/>
+        <result column="userPassword" property="userPassword"/>
+        <result column="workNumber" property="workNumber"/>
+        <result column="landline" property="landline"/>
+        <result column="ipconfig" property="ipconfig"/>
+        <result column="state" property="state"/>
+        <result column="inductionTime" property="inductionTime"/>
+        <result column="address" property="address"/>
+        <result column="sex" property="sex"/>
+        <result column="IDNumber" property="idnumber"/>
+        <result column="education" property="education"/>
+        <result column="organizationId" property="organizationId"/>
+        <result column="lastLogin" property="lastLogin"/>
+        <result column="loginCount" property="loginCount"/>
+        <result column="creationTime" property="creationTime"/>
+        <result column="creationPeopleId" property="creationPeopleId"/>
+        <result column="modifyTime" property="modifyTime"/>
+        <result column="modifyPeoleId" property="modifyPeoleId"/>
+    </resultMap>
+
+</mapper>

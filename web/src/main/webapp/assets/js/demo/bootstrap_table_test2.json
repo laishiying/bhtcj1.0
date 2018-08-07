@@ -1,0 +1,10 @@
+[
+  {
+    "name": "usernames",
+    "type": "ss",
+    "require": "True",
+    "default": "PHPer",
+    "desc": "\u7528\u6237\u540d",
+    "range": "1-100"
+  }
+]
